@@ -41,7 +41,7 @@ GMCs <- GMCs %>% select(CODE, GMC, LOCATION)
 GMCs$CODE <- as.character(GMCs$CODE)
 
 
-# Define UI for application that draws a pie chart
+# Define UI (user interface) - HTML code
 ui <- fluidPage(
   
   # Application title
@@ -216,7 +216,7 @@ ui <- fluidPage(
 
 
 
-# Define server logic required to draw a histogram
+# Define server logic
 server <- function(input, output) {
    
    output$TumourPlot <- renderPlot({
@@ -258,6 +258,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      table <- as.data.frame.matrix(table(QC_tumor[QC_tumor$CENTER %in% center,]$TUMOUR_TYPE, QC_tumor[QC_tumor$CENTER %in% center,]$GROUP))
      table <- tibble::rownames_to_column(table)
@@ -272,6 +287,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      FreqData <- as.data.frame(table(QC_tumor[QC_tumor$CENTER %in% center,]$TUMOUR_TYPE, QC_tumor[QC_tumor$CENTER %in% center,]$GROUP))
      names(FreqData) <- c("TUMOUR TYPE", "SAMPLE TYPE", "FREQ")
@@ -288,6 +318,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type & input$by_sample_type){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=AT_DROP, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "A/T Dropout") + bigger + tiltedX
@@ -310,6 +355,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type2 & input$by_sample_type2){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COVERAGE_HOMOGENEITY, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Unevenness of coverage")  + bigger + tiltedX
@@ -332,6 +392,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type3 & input$by_sample_type3){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MAPPING_RATE_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Mapping rate")  + bigger + tiltedX
@@ -354,6 +429,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type4 & input$by_sample_type4){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=CHIMERIC_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% chimeric reads")  + bigger + tiltedX
@@ -376,6 +466,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type5 & input$by_sample_type5){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DEAMINATION_MISMATCHES_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% deamination")  + bigger + tiltedX
@@ -398,6 +503,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type6 & input$by_sample_type6){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MEDIAN_COV, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Median coverage")  + bigger + tiltedX
@@ -420,6 +540,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type7 & input$by_sample_type7){
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DUPL_RATE, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Duplication rate")  + bigger + tiltedX
@@ -442,6 +577,21 @@ server <- function(input, output) {
      center  <- GMCs[GMCs$GMC %in% gmcs,]$CODE
      start_date <- input$dateRange[1]
      end_date <- input$dateRange[2]
+     if (!is.null(input$QC_file)){
+       QC <- read.csv(as.character(input$QC_file$datapath))
+       QC <- QC[!duplicated(QC),]  # remove exact duplicates
+       QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
+       QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
+       QC_tumor <- QC %>% filter(GROUP %in% tumor)
+       QC_tumor$GROUP <- as.character(QC_tumor$GROUP)
+       QC_tumor$TUMOUR_TYPE <- as.character(QC_tumor$TUMOUR_TYPE)
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "N/A",]$TUMOUR_TYPE <- "Unknown"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Testicular Germ Cell Tumours",]$TUMOUR_TYPE <- "Testicular"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Malignant Melanoma",]$TUMOUR_TYPE <- "Melanoma"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endometrial"
+       QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
+     }
      QC_tumor <- QC_tumor %>% filter((COLLECTING_DATE >= start_date) & (COLLECTING_DATE <= end_date))
      if (input$by_tumor_type8 & input$by_sample_type8) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COSMIC_COV_LT30X, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% Cosmic regions < 30X")   + bigger + tiltedX
