@@ -1,0 +1,14 @@
+CODE,PID_RANGE_START,PID_RANGE_START,GMC,LOCATION
+RGT,211000000,211999999,East of England,Cambridge University Hospitals NHS FT
+RJ1,212000000,212999999,Genomics Network Alliance,Guys and St Thomas NHS FT
+RW3,213000000,213999999,Greater Manchester,Central Manchester University Hospitals NHS FT
+RTD,214000000,214999999,North East and Cumbria,The Newcastle Upon Tyne Hospitals NHS FT
+RP4,215000000,215999999,North Thames,Great Ormond Street Hospital for Children NHS FT
+REP,216000000,216999999,North West Coast,Coast Liverpool Womens NHS FT
+RTH,217000000,217999999,Oxford,Oxford University Hospitals NHS Trust
+RHM,218000000,218999999,South Coast,University Hospital Southampton NHS FT
+RH8,219000000,219999999,South West Peninsula,Royal Devon and Exeter NHS FT
+RYJ,220000000,220999999,West London,Imperial College Healthcare NHS Trust
+RRK,221000000,221999999,West Midlands,University Hospitals Birmingham NHS FT
+RA7,222000000,222999999,West of England,Bristol Genetics Laboratory Southmead Hospital
+RHQ,223000000,223999999,Yorkshire & Humber,St. James's Hospital Leeds

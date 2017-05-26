@@ -21,7 +21,7 @@ bigger <- theme(legend.text=element_text(size=15), legend.title = element_text(s
 tiltedX <- theme(axis.text.x=element_text(angle=45,hjust=1))
 
 # Load and clean QC metrics data (NEEDS MANUAL UPDATE)
-QC <- read.csv("/Users/MartinaMijuskovic/General_QC/ready_to_plot.05-02-17.csv")
+QC <- read.csv("./Data/ready_to_plot.05-02-17.csv")
 QC <- QC[!duplicated(QC),]  # remove exact duplicates
 QC <- QC[!duplicated(QC$WELL_ID, fromLast = T),] # WARNING: this table has also WELL_ID duplicates where second entries are empty
 QC$COLLECTING_DATE <- as.Date(QC$COLLECTING_DATE, format = "%Y-%m-%d")
@@ -36,7 +36,7 @@ QC_tumor[QC_tumor$TUMOUR_TYPE == "Endometrial Carcinoma",]$TUMOUR_TYPE <- "Endom
 QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
 
 # Load GMC codes
-GMCs <- read.csv("/Users/MartinaMijuskovic/Documents/FromAlona/GMCs.csv")
+GMCs <- read.csv("./Data/GMCs.csv")
 GMCs <- GMCs %>% select(CODE, GMC, LOCATION)
 GMCs$CODE <- as.character(GMCs$CODE)
 
