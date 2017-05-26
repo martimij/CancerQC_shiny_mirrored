@@ -338,13 +338,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=AT_DROP, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "A/T Dropout") + bigger + tiltedX
      } 
      else if (input$by_sample_type) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=AT_DROP, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "A/T Dropout") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=AT_DROP, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "A/T Dropout") + bigger
      }
      else if (input$by_tumor_type) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=AT_DROP, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "A/T Dropout") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=AT_DROP, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "A/T Dropout") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=AT_DROP, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "A/T Dropout") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=AT_DROP, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "A/T Dropout") + bigger
      }
    })
    
@@ -375,13 +375,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COVERAGE_HOMOGENEITY, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Unevenness of coverage")  + bigger + tiltedX
      } 
      else if (input$by_sample_type2) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COVERAGE_HOMOGENEITY, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "Unevenness of coverage") + bigger  + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COVERAGE_HOMOGENEITY, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Unevenness of coverage") + bigger
      }
      else if (input$by_tumor_type2) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COVERAGE_HOMOGENEITY, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "Unevenness of coverage") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COVERAGE_HOMOGENEITY, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "Unevenness of coverage") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COVERAGE_HOMOGENEITY, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "Unevenness of coverage") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COVERAGE_HOMOGENEITY, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "Unevenness of coverage") + bigger
      }
    })
    
@@ -412,13 +412,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MAPPING_RATE_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Mapping rate")  + bigger + tiltedX
      } 
      else if (input$by_sample_type3) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MAPPING_RATE_PER, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "Mapping rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MAPPING_RATE_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Mapping rate") + bigger
      }
      else if (input$by_tumor_type3) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MAPPING_RATE_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "Mapping rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MAPPING_RATE_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "Mapping rate") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MAPPING_RATE_PER, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "Mapping rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MAPPING_RATE_PER, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "Mapping rate") + bigger
      }
    })
    
@@ -449,13 +449,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=CHIMERIC_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% chimeric reads")  + bigger + tiltedX
      } 
      else if (input$by_sample_type4) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=CHIMERIC_PER, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "% chimeric reads") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=CHIMERIC_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% chimeric reads") + bigger
      }
      else if (input$by_tumor_type4) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=CHIMERIC_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "% chimeric reads") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=CHIMERIC_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "% chimeric reads") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=CHIMERIC_PER, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "% chimeric reads") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=CHIMERIC_PER, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "% chimeric reads") + bigger
      }
    })
    
@@ -486,13 +486,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DEAMINATION_MISMATCHES_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% deamination")  + bigger + tiltedX
      } 
      else if (input$by_sample_type5) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DEAMINATION_MISMATCHES_PER, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "% deamination") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DEAMINATION_MISMATCHES_PER, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% deamination") + bigger
      }
      else if (input$by_tumor_type5) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DEAMINATION_MISMATCHES_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "% deamination") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DEAMINATION_MISMATCHES_PER, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "% deamination") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DEAMINATION_MISMATCHES_PER, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "% deamination") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DEAMINATION_MISMATCHES_PER, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "% deamination") + bigger
      }
    })
    
@@ -523,13 +523,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MEDIAN_COV, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Median coverage")  + bigger + tiltedX
      } 
      else if (input$by_sample_type6) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MEDIAN_COV, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "Median coverage") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MEDIAN_COV, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Median coverage") + bigger
      }
      else if (input$by_tumor_type6) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MEDIAN_COV, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "Median coverage") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=MEDIAN_COV, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "Median coverage") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MEDIAN_COV, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "Median coverage") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=MEDIAN_COV, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "Median coverage") + bigger
      }
    })
    
@@ -560,13 +560,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DUPL_RATE, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Duplication rate")  + bigger + tiltedX
      } 
      else if (input$by_sample_type7) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DUPL_RATE, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "Duplication rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DUPL_RATE, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "Duplication rate") + bigger
      }
      else if (input$by_tumor_type7) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DUPL_RATE, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "Duplication rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=DUPL_RATE, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "Duplication rate") + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DUPL_RATE, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "Duplication rate") + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=DUPL_RATE, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "Duplication rate") + bigger
      }
    })
    
@@ -597,13 +597,13 @@ server <- function(input, output) {
        ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COSMIC_COV_LT30X, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% Cosmic regions < 30X")   + bigger + tiltedX
      } 
      else if (input$by_sample_type8) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COSMIC_COV_LT30X, colour = GROUP)) + geom_boxplot() + labs(x = "GMC", y = "% Cosmic regions < 30X")  + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COSMIC_COV_LT30X, colour = GROUP)) + geom_boxplot() + labs(x = "", y = "% Cosmic regions < 30X")  + bigger
      }
      else if (input$by_tumor_type8) {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COSMIC_COV_LT30X, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "GMC", y = "% Cosmic regions < 30X")  + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=TUMOUR_TYPE, y=COSMIC_COV_LT30X, colour = TUMOUR_TYPE)) + geom_boxplot() + labs(x = "", y = "% Cosmic regions < 30X")  + bigger + tiltedX
      }
      else {
-       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COSMIC_COV_LT30X, colour = CENTER)) + geom_boxplot() + labs(x = "GMC", y = "% Cosmic regions < 30X")  + bigger + tiltedX
+       ggplot(QC_tumor[QC_tumor$CENTER %in% center,], aes(x=CENTER, y=COSMIC_COV_LT30X, colour = CENTER)) + geom_boxplot() + labs(x = "", y = "% Cosmic regions < 30X")  + bigger
      }
    })
    
