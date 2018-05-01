@@ -37,7 +37,7 @@ QC_tumor[QC_tumor$TUMOUR_TYPE == "Adult Glioma",]$TUMOUR_TYPE <- "Glioma"
 
 # Load GMC codes
 GMCs <- read.csv("./Data/GMCs.csv")
-GMCs <- GMCs %>% select(CODE, GMC, LOCATION)
+GMCs <- GMCs %>% select(CODE, GMC)
 GMCs$CODE <- as.character(GMCs$CODE)
 
 
