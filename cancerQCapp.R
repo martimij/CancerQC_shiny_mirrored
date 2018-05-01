@@ -53,7 +53,7 @@ ui <- fluidPage(
                    checkboxGroupInput(inputId = "gmc",
                                       label = "Select GMC(s):",
                                       choices = paste0(GMCs$GMC, " - ", GMCs$CODE),
-                                      selected = "East of England - RGT"
+                                      selected = "GMC1 - RGT"
                                       ),
                    
                    dateRangeInput(inputId = "dateRange",
